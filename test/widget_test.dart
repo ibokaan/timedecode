@@ -1,32 +1,30 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:timedecode/main.dart';
-
-import '../lib/main.dart';
+import 'package:timedecode/main.dart'; // <-- Burası güncellendi!
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const TimeDecodePage());
+  testWidgets('TimeDecode metni ekranda doğru şekilde görüntüleniyor', (WidgetTester tester) async {
+    // Uygulamamızı oluştur ve bir frame'i tetikle.
+    await tester.pumpWidget(const MyApp());
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    // 'TimeDecode' metninin varlığını doğrula.
+    expect(find.text('TimeDecode'), findsOneWidget);
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
+    
+    expect(find.text('TimeDecode'), findsNWidgets(2));
 
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+    // İsteğe bağlı olarak, ana 'TimeDecode' metninin stilini doğrula.
+    final Finder timeDecodeTextFinder = find.text('TimeDecode').last; // Body'deki metni al
+    final Text timeDecodeTextWidget = tester.widget<Text>(timeDecodeTextFinder);
+
+    expect(timeDecodeTextWidget.style?.fontSize, 32.0);
+    expect(timeDecodeTextWidget.style?.fontWeight, FontWeight.bold);
+    expect(timeDecodeTextWidget.style?.color, Colors.deepPurple);
+
+    // Temel widget'ların varlığını doğrula.
+    expect(find.byType(Center), findsOneWidget);
+    expect(find.byType(Scaffold), findsOneWidget);
+    expect(find.byType(MaterialApp), findsOneWidget);
   });
 }

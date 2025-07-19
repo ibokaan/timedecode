@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(const TimeDecodePage());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -9,25 +9,26 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      debugShowCheckedModeBanner: false, // Debug etiketi kapalı
-      home: TimeDecodePage(),
-    );
-  }
-}
-
-class TimeDecodePage extends StatelessWidget {
-  const TimeDecodePage({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('TimeDecode'),
-        centerTitle: true, // Başlığı ortalar
-        backgroundColor: Colors.deepPurple, // İstersen rengini değiştir
+    return MaterialApp(
+      title: 'TimeDecode Uygulaması',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
       ),
-      body: const SizedBox.shrink(), // Boş bir alan, hiç içerik yok
+      home: Scaffold(
+        appBar: AppBar(
+          title: const Text('TimeDecode'),
+        ),
+        body: const Center(
+          child: Text(
+            'TimeDecode',
+            style: TextStyle(
+              fontSize: 32.0,
+              fontWeight: FontWeight.bold,
+              color: Colors.deepPurple,
+            ),
+          ),
+        ),
+      ),
     );
   }
 }
